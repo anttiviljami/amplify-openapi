@@ -1,0 +1,22 @@
+{
+  "name": "amplify-openapi-client",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anttiviljami/amplify-openapi.git",
+    "directory": "packages/amplify-category-openapi"
+  },
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch-build": "tsc -w"
+  },
+  "keywords": [],
+  "author": "Viljami Kuosmanen <viljami@viljami.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "openapi-client-axios": "^3.5.0"
+  }
+}

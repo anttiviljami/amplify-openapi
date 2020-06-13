@@ -1,0 +1,19 @@
+{
+  "name": "functionTemplate",
+  "type": "util",
+  "commands": [],
+  "eventHandlers": [],
+  "functionTemplate": {
+    "conditions": {
+      "provider": "awscloudformation",
+      "service": "Lambda",
+      "runtime": "nodejs"
+    },
+    "templates": [
+      {
+        "name": "Serverless OpenAPI Backend (Integration with API Gateway)",
+        "value": "openapi-backend"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+# build
+packages/*/lib
+packages/amplify-openapi-client/*.js
+packages/amplify-openapi-client/*.map
+packages/amplify-openapi-client/*.d.ts
+*.tsbuildinfo
+
+# debug
+lerna-debug.log
+npm-debug.log
+yarn-error.log
+
+# include jest config
+!jest.config.js
+
+# npm
+node_modules
+npm_debug.log*
+
+# vscode
+.vscode
+

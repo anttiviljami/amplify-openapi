@@ -1,0 +1,40 @@
+{
+  "name": "amplify-openapi",
+  "version": "1.0.0",
+  "description": "Plugins for OpenAPI tooling with AWS Amplify",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "lerna run test",
+    "build": "lerna run build",
+    "watch-build": "lerna run watch-build",
+    "prettier": "prettier --write packages/*/src/**",
+    "publish": "lerna publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anttiviljami/amplify-openapi.git"
+  },
+  "keywords": [],
+  "author": "Viljami Kuosmanen <viljami@viljami.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anttiviljami/amplify-openapi/issues"
+  },
+  "homepage": "https://github.com/anttiviljami/amplify-openapi#readme",
+  "dependencies": {
+    "lerna": "^3.22.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  }
+}

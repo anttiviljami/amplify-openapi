@@ -1,0 +1,10 @@
+{
+  "name": "openapi",
+  "type": "category",
+  "commands": [
+    "add",
+    "mock",
+    "help"
+  ],
+  "eventHandlers": []
+}
