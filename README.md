@@ -2,3 +2,10 @@
 
 Plugins for OpenAPI tooling with AWS Amplify
 
+## Installation
+
+```
+npm install -g amplify-openapi
+amplify plugin scan
+```
+

@@ -1,15 +1,15 @@
 {
   "name": "amplify-openapi",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "description": "Plugins for OpenAPI tooling with AWS Amplify",
-  "private": true,
   "main": "index.js",
   "scripts": {
     "test": "lerna run test",
     "build": "lerna run build",
     "watch-build": "lerna run watch-build",
     "prettier": "prettier --write packages/*/src/**",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "postinstall": "npm install -g node_modules/amplify-category-openapi node_modules/amplify-nodejs-function-template-openapi-provider"
   },
   "repository": {
     "type": "git",
@@ -23,12 +23,19 @@
   },
   "homepage": "https://github.com/anttiviljami/amplify-openapi#readme",
   "dependencies": {
-    "lerna": "^3.22.1"
+    "amplify-openapi-client": "*",
+    "amplify-category-openapi": "*",
+    "amplify-nodejs-function-template-openapi-provider": "*"
   },
+  "files": [
+    "package.json",
+    "package-lock.json"
+  ],
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "lerna": "^3.22.1",
     "@types/jest": "^26.0.0",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
