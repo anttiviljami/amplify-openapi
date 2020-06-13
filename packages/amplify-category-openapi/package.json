@@ -2,7 +2,7 @@
   "name": "amplify-category-openapi",
   "version": "0.0.1",
   "description": "",
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/anttiviljami/amplify-openapi.git",
     "directory": "packages/amplify-category-openapi"
