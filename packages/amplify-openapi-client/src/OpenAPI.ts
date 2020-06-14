@@ -79,7 +79,6 @@ export class OpenAPI {
         const config: AxiosRequestConfig = {
           method: 'GET',
           url: baseURL,
-          headers: {},
         };
         const { headers } = await this.signRequest(config, api);
         swaggerParserOpts.resolve.http.headers = headers;
@@ -121,7 +120,7 @@ export class OpenAPI {
       access_key: accessKeyId,
       session_token: sessionToken,
     };
-    const { headers } = Signer.sign(config, credentials, {
+    const { headers } = Signer.sign({ config, headers: {} }, credentials, {
       region: api.region || 'us-east-1',
       service: api.service || 'execute-api',
     });
