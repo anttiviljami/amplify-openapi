@@ -10,7 +10,7 @@
     "link": "lerna run link",
     "prettier": "prettier --write packages/*/src/**",
     "publish": "lerna publish",
-    "postinstall": "npm install -g node_modules/amplify-category-openapi node_modules/amplify-nodejs-function-template-openapi-provider"
+    "postinstall": "npm install -g node_modules/amplify-nodejs-function-template-openapi-provider"
   },
   "repository": {
     "type": "git",
