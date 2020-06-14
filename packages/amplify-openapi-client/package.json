@@ -11,8 +11,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "watch-build": "tsc -w",
-    "prepare": "npm run build"
+    "watch-build": "tsc -w"
   },
   "keywords": [],
   "author": "Viljami Kuosmanen <viljami@viljami.io>",
@@ -27,5 +26,6 @@
   "devDependencies": {
     "@aws-amplify/core": "^3.3.3",
     "@types/lodash": "^4.14.155"
-  }
+  },
+  "gitHead": "a26c24de8f4260ecefaf50dba360b8aff4098ae8"
 }

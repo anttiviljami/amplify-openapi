@@ -11,13 +11,13 @@
   "scripts": {
     "build": "tsc",
     "watch-build": "tsc -w",
-    "link": "npm link",
-    "prepare": "npm run build"
+    "link": "npm link"
   },
   "keywords": [],
   "author": "Viljami Kuosmanen <viljami@viljami.io>",
   "license": "MIT",
   "dependencies": {
     "amplify-function-plugin-interface": "^1.3.1"
-  }
+  },
+  "gitHead": "a26c24de8f4260ecefaf50dba360b8aff4098ae8"
 }

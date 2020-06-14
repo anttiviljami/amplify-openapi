@@ -10,6 +10,7 @@
     "watch-build": "lerna run watch-build",
     "link": "lerna run link",
     "prettier": "prettier --write packages/*/src/**",
+    "prepare": "lerna run build",
     "publish": "lerna publish"
   },
   "repository": {
