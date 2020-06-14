@@ -114,7 +114,7 @@ export class OpenAPI {
     return client;
   }
 
-  private async signRequest(requestConfig: AxiosRequestConfig, api: APIResource) {
+  private async signRequest(config: AxiosRequestConfig, api: APIResource) {
     const { secretAccessKey, accessKeyId, sessionToken } = await Credentials.get();
     const credentials = {
       secret_key: secretAccessKey,
@@ -122,14 +122,15 @@ export class OpenAPI {
       session_token: sessionToken,
     };
 
-    const config = {
-      ...requestConfig,
-      method: requestConfig.method ? requestConfig.method.toUpperCase() : 'GET',
+    const requestToSign = {
+      ...config,
+      url: config.baseURL ? `${config.baseURL}${config.url}` : config.url,
+      method: config.method ? config.method.toUpperCase() : 'GET',
       headers: {},
     } as AxiosRequestConfig;
 
     // get signed headers
-    const { headers } = Signer.sign(config, credentials, {
+    const { headers } = Signer.sign(requestToSign, credentials, {
       region: api.region || 'us-east-1',
       service: api.service || 'execute-api',
     });
