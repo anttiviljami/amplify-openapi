@@ -70,7 +70,6 @@ export class OpenAPI {
     const swaggerParserOpts = {
       resolve: {
         http: {
-          withCredentials: true,
           headers: {},
         },
       },
@@ -112,10 +111,6 @@ export class OpenAPI {
       logger.debug('Client config', client);
       return config;
     });
-
-    // enable credentials
-    client.defaults.withCredentials = true;
-
     return client;
   }
 
