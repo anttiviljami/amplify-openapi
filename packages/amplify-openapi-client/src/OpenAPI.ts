@@ -121,11 +121,11 @@ export class OpenAPI {
       access_key: accessKeyId,
       session_token: sessionToken,
     };
-    const signedConfig = Signer.sign(config, credentials, {
+    const { headers } = Signer.sign(config, credentials, {
       region: api.region || 'us-east-1',
       service: api.service || 'execute-api',
     });
-    logger.debug('Signed Request: ', signedConfig);
-    return signedConfig;
+    delete headers['host'];
+    return { ...config, headers };
   }
 }
