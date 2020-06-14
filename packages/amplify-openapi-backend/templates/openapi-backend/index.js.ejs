@@ -45,7 +45,7 @@ api.register({
 
 // entrypoint
 exports.handler = async (event, context) => {
-  if (!api.initialized) {
+  if (!api.initalized) {
     await api.init();
   }
     
