@@ -11,7 +11,8 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "watch-build": "tsc -w"
+    "watch-build": "tsc -w",
+    "prepare": "npm run build"
   },
   "keywords": [],
   "author": "Viljami Kuosmanen <viljami@viljami.io>",
@@ -24,6 +25,7 @@
     "openapi-client-axios": "^3.6.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.155"
+    "@types/lodash": "^4.14.155",
+    "@aws-amplify/core": "^3.3.3"
   }
 }

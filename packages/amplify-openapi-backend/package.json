@@ -11,7 +11,8 @@
   "scripts": {
     "build": "tsc",
     "watch-build": "tsc -w",
-    "link": "npm link"
+    "link": "npm link",
+    "prepare": "npm run build"
   },
   "keywords": [],
   "author": "Viljami Kuosmanen <viljami@viljami.io>",
