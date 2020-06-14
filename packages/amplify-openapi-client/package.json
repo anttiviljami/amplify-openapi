@@ -16,7 +16,15 @@
   "keywords": [],
   "author": "Viljami Kuosmanen <viljami@viljami.io>",
   "license": "MIT",
+  "peerDependencies": {
+    "@aws-amplify/core": "^3.3.3"
+  },
   "dependencies": {
-    "openapi-client-axios": "^3.5.0"
+    "lodash": "^4.17.15",
+    "openapi-client-axios": "^3.6.0"
+  },
+  "devDependencies": {
+    "@aws-amplify/core": "^3.3.3",
+    "@types/lodash": "^4.14.155"
   }
 }
