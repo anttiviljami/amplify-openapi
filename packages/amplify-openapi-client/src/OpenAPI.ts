@@ -49,8 +49,7 @@ export class OpenAPI {
     if (!api) {
       throw Error(`Could not find API resource ${opts.name}`);
     }
-    const instance = this.instances[name] || this.createInstance(opts);
-    console.log('HERE!');
+    const instance = this.instances[name] || (await this.createInstance(opts));
     const client = await instance.getClient();
     this.configureClient(client, api);
     return client;
@@ -61,15 +60,40 @@ export class OpenAPI {
     return find(resources, { name });
   }
 
-  private createInstance(opts: ClientOpts): OpenAPIClientAxios {
+  private async createInstance(opts: ClientOpts) {
     const api = this.getAPIResource(opts.name);
     if (!api || !api.endpoint) {
       throw Error(`No endpoint configured for resource ${name}`);
     }
     const baseURL = `${api.endpoint}${opts.path}`;
+
+    const swaggerParserOpts = {
+      resolve: {
+        http: {
+          withCredentials: true,
+          headers: {},
+        },
+      },
+    };
+    try {
+      try {
+        const config: AxiosRequestConfig = {
+          method: 'GET',
+          url: baseURL,
+          headers: {},
+        };
+        const { headers } = await this.signRequest(config, api);
+        swaggerParserOpts.resolve.http.headers = headers;
+      } catch (err) {
+        logger.debug('No credentials available, the request will be unsigned', err);
+      }
+    } catch (err) {
+      console.log({ err });
+    }
     this.instances[name] = new OpenAPIClientAxios({
       definition: baseURL,
       withServer: { url: baseURL },
+      swaggerParserOpts,
       validate: false,
     });
     return this.instances[name];
@@ -80,24 +104,28 @@ export class OpenAPI {
       // sign request if no authorization header was set and credentials are available
       if (!config.headers['Authorization']) {
         try {
-          const { secretAccessKey, accessKeyId, sessionToken } = await Credentials.get();
-          const credentials = {
-            secret_key: secretAccessKey,
-            access_key: accessKeyId,
-            session_token: sessionToken,
-          };
-          config = this.sign(config, credentials, api);
+          config = await this.signRequest(config, api);
         } catch (err) {
-          logger.debug('No credentials available, the request will be unsigned');
+          logger.debug('No credentials available, the request will be unsigned', err);
         }
       }
       logger.debug('Client config', client);
       return config;
     });
+
+    // enable credentials
+    client.defaults.withCredentials = true;
+
     return client;
   }
 
-  private sign(config: AxiosRequestConfig, credentials: Credentials, api: APIResource) {
+  private async signRequest(config: AxiosRequestConfig, api: APIResource) {
+    const { secretAccessKey, accessKeyId, sessionToken } = await Credentials.get();
+    const credentials = {
+      secret_key: secretAccessKey,
+      access_key: accessKeyId,
+      session_token: sessionToken,
+    };
     const signedConfig = Signer.sign(config, credentials, {
       region: api.region || 'us-east-1',
       service: api.service || 'execute-api',
