@@ -4,7 +4,11 @@
 const OpenAPIBackend = require("openapi-backend").default;
 const definition = "./openapi.yml";
 const apiRoot = "<%= props.functionTemplate.parameters.path %>";
-const api = new OpenAPIBackend({ definition, apiRoot });
+const api = new OpenAPIBackend({
+  definition,
+  apiRoot,
+  quick: true, // use quick mode to optimise lambda startup
+});
 
 // response headers
 const headers = {
@@ -43,14 +47,15 @@ api.register({
   },
 });
 
+api.init();
+
 // entrypoint
 exports.handler = async (event, context) => {
-  if (!api.initalized) {
-    await api.init();
-  }
-    
   // return json openapi document at root
-  if (event.httpMethod === 'GET' && event.path === apiRoot) {
+  if (event.httpMethod === "GET" && event.path === apiRoot) {
+    if (!api.document) {
+      await api.loadDocument();
+    }
     return {
       statusCode: 200,
       body: JSON.stringify(api.document),
