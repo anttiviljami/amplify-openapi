@@ -114,17 +114,27 @@ export class OpenAPI {
     return client;
   }
 
-  private async signRequest(config: AxiosRequestConfig, api: APIResource) {
+  private async signRequest(requestConfig: AxiosRequestConfig, api: APIResource) {
     const { secretAccessKey, accessKeyId, sessionToken } = await Credentials.get();
     const credentials = {
       secret_key: secretAccessKey,
       access_key: accessKeyId,
       session_token: sessionToken,
     };
-    const { headers } = Signer.sign({ ...config, headers: {} }, credentials, {
+
+    const config = {
+      ...requestConfig,
+      method: requestConfig.method ? requestConfig.method.toUpperCase() : 'GET',
+      headers: {},
+    } as AxiosRequestConfig;
+
+    // get signed headers
+    const { headers } = Signer.sign(config, credentials, {
       region: api.region || 'us-east-1',
       service: api.service || 'execute-api',
     });
+
+    // don't return host header
     delete headers['host'];
     return { ...config, headers };
   }
