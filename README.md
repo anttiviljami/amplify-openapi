@@ -12,7 +12,7 @@ OpenAPI plugins / libraries for AWS Amplify
 - [amplify-openapi-backend](https://github.com/anttiviljami/amplify-openapi/tree/master/packages/amplify-openapi-backend)
 - [amplify-openapi-client](https://github.com/anttiviljami/amplify-openapi/tree/master/packages/amplify-openapi-client)
 
-## Setup
+## Usage
 
 Install `amplify-openapi-backend` plugin
 
@@ -55,6 +55,13 @@ api.configure(awsconfig);
 api.getClient({ name: "myopenapi", path: "/api" }).then(async client => {
   const pets = await client.getPets();
 });
+```
+
+## Development
+
+```
+npm install
+npm run watch-build
 ```
 
 ## Contributing
