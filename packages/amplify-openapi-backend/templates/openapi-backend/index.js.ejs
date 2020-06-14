@@ -1,25 +1,29 @@
 <%= props.topLevelComment %>
 
 // create api from definition
-const OpenAPIBackend = require('openapi-backend').default;
-const api = new OpenAPIBackend({ definition: './openapi.yml' });
+const OpenAPIBackend = require("openapi-backend").default;
+const definition = "./openapi.yml";
+const apiRoot = "<%= props.functionTemplate.parameters.path %>";
+const api = new OpenAPIBackend({ definition, apiRoot });
 
 // response headers
 const headers = {
-  'content-type': 'application/json',
-  'access-control-allow-origin': '*', // lazy cors config
+  "content-type": "application/json",
+  "access-control-allow-origin": "*", // lazy cors config
 };
 
 // register default handlers
 api.register({
   notFound: async (c, event, context) => {
+    // route not found
     return {
       statusCode: 404,
-      body: JSON.stringify({ err: 'not found' }),
+      body: JSON.stringify({ err: "not found" }),
       headers,
     };
   },
   validationFail: async (c, event, context) => {
+    // request validation failed
     return {
       statusCode: 400,
       body: JSON.stringify({ err: c.validation.errors }),
@@ -27,7 +31,10 @@ api.register({
     };
   },
   notImplemented: async (c, event, context) => {
-    const { status, mock } = api.mockResponseForOperation(c.operation.operationId);
+    // mock handler
+    const { status, mock } = api.mockResponseForOperation(
+      c.operation.operationId
+    );
     return {
       statusCode: status,
       body: JSON.stringify(mock),
@@ -36,13 +43,14 @@ api.register({
   },
 });
 
-// init api
-api.init();
-
 // entrypoint
 exports.handler = async (event, context) => {
-  // return openapi spec at /openapi.json
-  if (event.path === '/openapi.json') {
+  if (!api.initialized) {
+    await api.init();
+  }
+    
+  // return json openapi document at root
+  if (event.httpMethod === 'GET' && event.path === apiRoot) {
     return {
       statusCode: 200,
       body: JSON.stringify(api.document),
@@ -60,6 +68,6 @@ exports.handler = async (event, context) => {
       headers: event.headers,
     },
     event,
-    context,
+    context
   );
 };

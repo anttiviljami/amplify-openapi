@@ -12,6 +12,9 @@ export const provider = async () => {
     functionTemplate: {
       sourceRoot: pathToTemplateFiles,
       sourceFiles: files,
+      parameters: {
+        path: '/', // this is the default. If a different value is already specified, this will not overwrite it
+      },
       defaultEditorFile: path.join('src', 'index.js'),
       destMap: getDestMap(files),
     },

@@ -11,7 +11,7 @@
     },
     "templates": [
       {
-        "name": "Serverless OpenAPI Backend (Integration with API Gateway)",
+        "name": "OpenAPI Backend (Integration with API Gateway)",
         "value": "openapi-backend"
       }
     ]

@@ -1,11 +1,11 @@
 {
-  "name": "amplify-nodejs-function-template-openapi-provider",
+  "name": "amplify-openapi-backend",
   "version": "0.0.1",
   "description": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/anttiviljami/amplify-openapi.git",
-    "directory": "packages/amplify-nodejs-function-template-openapi-provider"
+    "directory": "packages/amplify-openapi-backend"
   },
   "main": "lib/index.js",
   "scripts": {

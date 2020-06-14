@@ -1,6 +1,6 @@
 import { FunctionTemplateContributorFactory } from 'amplify-function-plugin-interface';
 
-import { provider as openapiBackendProvider } from './openapi-backend-provider';
+import { provider as openapiBackendProvider } from './provider';
 
 export const functionTemplateContributorFactory: FunctionTemplateContributorFactory = (context) => {
   return {

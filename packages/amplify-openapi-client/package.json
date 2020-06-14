@@ -7,8 +7,8 @@
     "url": "https://github.com/anttiviljami/amplify-openapi.git",
     "directory": "packages/amplify-category-openapi"
   },
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch-build": "tsc -w"
@@ -16,7 +16,7 @@
   "keywords": [],
   "author": "Viljami Kuosmanen <viljami@viljami.io>",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "openapi-client-axios": "^3.5.0"
   }
 }

@@ -3,14 +3,14 @@
   "version": "0.0.3",
   "description": "Plugins for OpenAPI tooling with AWS Amplify",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "lerna run test",
     "build": "lerna run build",
     "watch-build": "lerna run watch-build",
     "link": "lerna run link",
     "prettier": "prettier --write packages/*/src/**",
-    "publish": "lerna publish",
-    "postinstall": "npm install -g node_modules/amplify-nodejs-function-template-openapi-provider"
+    "publish": "lerna publish"
   },
   "repository": {
     "type": "git",
