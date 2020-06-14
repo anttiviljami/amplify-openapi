@@ -1,0 +1,65 @@
+<%= props.topLevelComment %>
+
+// create api from definition
+const OpenAPIBackend = require('openapi-backend').default;
+const api = new OpenAPIBackend({ definition: './openapi.yml' });
+
+// response headers
+const headers = {
+  'content-type': 'application/json',
+  'access-control-allow-origin': '*', // lazy cors config
+};
+
+// register default handlers
+api.register({
+  notFound: async (c, event, context) => {
+    return {
+      statusCode: 404,
+      body: JSON.stringify({ err: 'not found' }),
+      headers,
+    };
+  },
+  validationFail: async (c, event, context) => {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ err: c.validation.errors }),
+      headers,
+    };
+  },
+  notImplemented: async (c, event, context) => {
+    const { status, mock } = api.mockResponseForOperation(c.operation.operationId);
+    return {
+      statusCode: status,
+      body: JSON.stringify(mock),
+      headers,
+    };
+  },
+});
+
+// init api
+api.init();
+
+// entrypoint
+exports.handler = async (event, context) => {
+  // return openapi spec at /openapi.json
+  if (event.path === '/openapi.json') {
+    return {
+      statusCode: 200,
+      body: JSON.stringify(api.document),
+      headers,
+    };
+  }
+
+  // handle request
+  return api.handleRequest(
+    {
+      method: event.httpMethod,
+      path: event.path,
+      query: event.queryStringParameters,
+      body: event.body,
+      headers: event.headers,
+    },
+    event,
+    context,
+  );
+};
