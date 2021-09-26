@@ -49,7 +49,7 @@ export class OpenAPI {
     if (!api) {
       throw Error(`Could not find API resource ${opts.name}`);
     }
-    const instance = this.instances[name] || (await this.createInstance(opts));
+    const instance = this.instances[opts.name] || (await this.createInstance(opts));
     const client = await instance.getClient();
     this.configureClient(client, api);
     return client;
@@ -89,13 +89,13 @@ export class OpenAPI {
     } catch (err) {
       console.log({ err });
     }
-    this.instances[name] = new OpenAPIClientAxios({
+    this.instances[opts.name] = new OpenAPIClientAxios({
       definition: baseURL,
       withServer: { url: baseURL },
       swaggerParserOpts,
       validate: false,
     });
-    return this.instances[name];
+    return this.instances[opts.name];
   }
 
   private configureClient(client: OpenAPIClient, api: APIResource) {

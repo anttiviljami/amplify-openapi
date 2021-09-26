@@ -24,8 +24,9 @@
     "openapi-client-axios": "^3.6.1"
   },
   "devDependencies": {
-    "@aws-amplify/core": "^3.3.3",
-    "@types/lodash": "^4.14.155"
+    "@aws-amplify/core": "^3.8.24",
+    "@types/lodash": "^4.14.155",
+    "typescript": "^4.4.3"
   },
   "gitHead": "a26c24de8f4260ecefaf50dba360b8aff4098ae8"
 }
